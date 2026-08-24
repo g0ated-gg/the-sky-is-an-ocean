@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://do8r77ok0kq76"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_23krd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bhunq"]
+
+[node name="Box" type="RigidBody3D" unique_id=1230879981]
+physics_material_override = SubResource("PhysicsMaterial_23krd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=290812120]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1057610615]
+shape = SubResource("BoxShape3D_bhunq")

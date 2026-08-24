@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bc4cnenbc8ymm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gkef2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bhunq"]
+
+[node name="Ball" type="RigidBody3D" unique_id=948986956]
+physics_material_override = SubResource("PhysicsMaterial_gkef2")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1236119678]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1401626150]
+shape = SubResource("SphereShape3D_bhunq")

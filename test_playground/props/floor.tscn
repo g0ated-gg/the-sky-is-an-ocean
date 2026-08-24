@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bor8oooo8ewrj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kb7ek"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_riqys"]
+
+[node name="Floor" type="StaticBody3D" unique_id=1963107471]
+physics_material_override = SubResource("PhysicsMaterial_kb7ek")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=937448397]
+size = Vector3(100, 0, 100)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1034480100]
+shape = SubResource("WorldBoundaryShape3D_riqys")
