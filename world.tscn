@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://ot8al60lyrgh"]
 
-[ext_resource type="PackedScene" uid="uid://bor8oooo8ewrj" path="res://test_playground/props/floor.tscn" id="1_pmmqb"]
-[ext_resource type="PackedScene" uid="uid://do8r77ok0kq76" path="res://test_playground/props/box.tscn" id="2_wfyjx"]
-[ext_resource type="PackedScene" uid="uid://bc4cnenbc8ymm" path="res://test_playground/props/ball.tscn" id="3_ep2pr"]
-[ext_resource type="PackedScene" uid="uid://d1ha3t1e7y8co" path="res://test_playground/characters/crab.tscn" id="4_wfyjx"]
+[ext_resource type="PackedScene" uid="uid://bor8oooo8ewrj" path="res://props/floor.tscn" id="1_pmmqb"]
+[ext_resource type="PackedScene" uid="uid://do8r77ok0kq76" path="res://props/box.tscn" id="2_wfyjx"]
+[ext_resource type="PackedScene" uid="uid://bc4cnenbc8ymm" path="res://props/ball.tscn" id="3_ep2pr"]
+[ext_resource type="PackedScene" uid="uid://d1ha3t1e7y8co" path="res://characters/crab/crab.tscn" id="4_wfyjx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sm1cj"]
 

@@ -1,34 +1,38 @@
 [gd_scene format=3 uid="uid://d1ha3t1e7y8co"]
 
-[ext_resource type="Script" uid="uid://b2f6ygkhxgnpj" path="res://test_playground/characters/crab.gd" id="1_6h2op"]
+[ext_resource type="Script" uid="uid://b2f6ygkhxgnpj" path="res://characters/crab/crab.gd" id="1_6h2op"]
+[ext_resource type="Material" uid="uid://ja7so85upi0r" path="res://characters/crab/crab.tres" id="2_gkef2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bhunq"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_bhunq"]
 size = Vector3(0.8, 0.8, 0.8)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6h2op"]
-albedo_color = Color(1, 0.49803922, 0, 1)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_bhunq"]
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_vwow1"]
 
 [node name="Crab" type="CharacterBody3D" unique_id=1571507680]
 script = ExtResource("1_6h2op")
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=2031170995]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.5, 0)
-mesh = SubResource("PrismMesh_bhunq")
-material = SubResource("StandardMaterial3D_6h2op")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=501621431]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_bhunq")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CollisionShape3D" unique_id=1609701737]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CollisionShape3D/CSGCombiner3D" unique_id=2031170995]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_bhunq")
+material = ExtResource("2_gkef2")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D/CSGCombiner3D" unique_id=1205809537]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+size = Vector3(0.8, 0.8, 0.2)
+material = ExtResource("2_gkef2")
 
 [node name="RotationPivot" type="Node3D" parent="." unique_id=2098256238]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.5, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="RotationPivot" unique_id=654560054]
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 shape = SubResource("SeparationRayShape3D_vwow1")
 spring_length = 4.5
 margin = 0.2
