@@ -6,9 +6,115 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_bhunq"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_bhunq"]
-size = Vector3(0.8, 0.8, 0.8)
+size = Vector3(0.8, 0.8, 0.4)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_68wk0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4nj8y"]
+size = Vector3(0.209, 0.05, 0.395)
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_vwow1"]
+
+[sub_resource type="Animation" id="Animation_wqqtk"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D/CSGCombiner3D/ClawPivot/LeftClaw:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-0.17453292, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D/CSGCombiner3D/ClawPivot/RightClaw:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-0.17453292, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D/CSGCombiner3D/ClawPivot/LeftClaw:collision_layer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D/CSGCombiner3D/ClawPivot/RightClaw:collision_layer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ek2db"]
+resource_name = "kick"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D/CSGCombiner3D/ClawPivot/LeftClaw:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.17453292, -0.25, 0, 0.25, 0, 0.5235988, -0.11666667, -0.11635528, 0, 0, -0.2617994, -0.050000004, 0.1308997, 0, 0),
+"times": PackedFloat32Array(0, 0.2, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D/CSGCombiner3D/ClawPivot/RightClaw:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.17453292, -0.25, 0, 0.25, 0, 0.5235988, -0.11666667, -0.11635528, 0, 0, -0.2617994, -0.050000004, 0.1308997, 0, 0),
+"times": PackedFloat32Array(0, 0.2, 0.3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D/CSGCombiner3D/ClawPivot/RightClaw:collision_layer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0, 1, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D/CSGCombiner3D/ClawPivot/LeftClaw:collision_layer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(1, 0, 0, 0.050000004, 0, 1, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wqqtk"]
+_data = {
+&"RESET": SubResource("Animation_wqqtk"),
+&"kick": SubResource("Animation_ek2db")
+}
 
 [node name="Crab" type="CharacterBody3D" unique_id=1571507680]
 script = ExtResource("1_6h2op")
@@ -20,13 +126,48 @@ shape = SubResource("SphereShape3D_bhunq")
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="CollisionShape3D" unique_id=1609701737]
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="CollisionShape3D/CSGCombiner3D" unique_id=2031170995]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.25)
 mesh = SubResource("PrismMesh_bhunq")
 material = ExtResource("2_gkef2")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D/CSGCombiner3D" unique_id=1205809537]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-size = Vector3(0.8, 0.8, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
+size = Vector3(0.8, 0.4, 0.2)
+material = ExtResource("2_gkef2")
+
+[node name="ClawPivot" type="Node3D" parent="CollisionShape3D/CSGCombiner3D" unique_id=1560760216]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="LeftClaw" type="AnimatableBody3D" parent="CollisionShape3D/CSGCombiner3D/ClawPivot" unique_id=1862359870]
+transform = Transform3D(1, 0, 0, 0, 0.9848076, 0.17364815, 0, -0.17364816, 0.98480755, 0, 0, 0)
+collision_layer = 0
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_68wk0")
+sync_to_physics = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionShape3D/CSGCombiner3D/ClawPivot/LeftClaw" unique_id=279761737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56795055, -2.9802322e-08, -0.7660363)
+shape = SubResource("BoxShape3D_4nj8y")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D/CSGCombiner3D/ClawPivot/LeftClaw" unique_id=1199630375]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.5, -2.9802322e-08, -0.5)
+size = Vector3(0.5, 0.1, 1)
+material = ExtResource("2_gkef2")
+
+[node name="RightClaw" type="AnimatableBody3D" parent="CollisionShape3D/CSGCombiner3D/ClawPivot" unique_id=529507044]
+transform = Transform3D(1, 0, 0, 0, 0.9848076, 0.17364815, 0, -0.17364816, 0.98480755, -1, 0, 0)
+collision_layer = 0
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_68wk0")
+sync_to_physics = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionShape3D/CSGCombiner3D/ClawPivot/RightClaw" unique_id=1092278503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3916244, -2.9802322e-08, -0.7660363)
+shape = SubResource("BoxShape3D_4nj8y")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D/CSGCombiner3D/ClawPivot/RightClaw" unique_id=1442388320]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.5, -2.9802322e-08, -0.5)
+size = Vector3(0.5, 0.1, 1)
 material = ExtResource("2_gkef2")
 
 [node name="RotationPivot" type="Node3D" parent="." unique_id=2098256238]
@@ -40,3 +181,6 @@ margin = 0.2
 [node name="Camera3D" type="Camera3D" parent="RotationPivot/SpringArm3D" unique_id=1254871119]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 fov = 50.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1711516037]
+libraries/ = SubResource("AnimationLibrary_wqqtk")

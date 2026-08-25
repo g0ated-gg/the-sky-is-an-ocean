@@ -14,6 +14,8 @@ extends CharacterBody3D
 @onready var character_body: CSGCombiner3D = $CollisionShape3D/CSGCombiner3D
 @onready var rotation_pivot: Node3D = $RotationPivot
 @onready var spring_arm: SpringArm3D = $RotationPivot/SpringArm3D
+@onready var claw_pivot: Node3D = $CollisionShape3D/CSGCombiner3D/ClawPivot
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 var double_jump := true
@@ -38,7 +40,9 @@ func camera_rotation(event: InputEvent):
 func _physics_process(delta: float) -> void:
 	camera_zooming(delta)
 	character_movement(delta)
-	check_end()
+	listen_kick()
+	listen_reset()
+	listen_end()
 
 func camera_zooming(delta: float):
 	var zoom_direction := 0
@@ -94,12 +98,21 @@ func character_movement(delta: float) -> void:
 		character_body.look_at(character_body.global_position + horizontal_look_target, up_direction)
 		velocity.x = direction.x * speed_max * side_acceleration_multiplier
 		velocity.z = direction.z * speed_max * side_acceleration_multiplier
+
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, speed_max)
 		velocity.z = move_toward(velocity.z, 0.0, speed_max)
 
 	move_and_slide()
 
-func check_end() -> void:
+func listen_kick() -> void:
+	if Input.is_action_just_pressed("kick"):
+		animation_player.play("kick")
+
+func listen_reset() -> void:
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
+
+func listen_end() -> void:
 	if Input.is_action_just_pressed("pause"):
 		get_tree().quit()
