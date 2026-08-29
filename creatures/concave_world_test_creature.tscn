@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://xml6q172gere"]
+
+[ext_resource type="PackedScene" uid="uid://opjxhse58t73" path="res://creatures/concave_world_creature.tscn" id="1_c0klv"]
+[ext_resource type="Script" uid="uid://dylm6e0yq80uf" path="res://creatures/concave_world_test_creature.gd" id="2_6hu8p"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bhunq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bhunq"]
+
+[node name="ConcaveWorldTestCreature" unique_id=1697599058 instance=ExtResource("1_c0klv")]
+script = ExtResource("2_6hu8p")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." index="0" unique_id=522967055]
+mesh = SubResource("CapsuleMesh_bhunq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=438354518]
+shape = SubResource("CapsuleShape3D_bhunq")

@@ -1,3 +1,4 @@
+class_name Crab
 extends CharacterBody3D
 
 @export var speed_max := 5.0 # m/s
