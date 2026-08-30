@@ -1,13 +1,12 @@
-[gd_scene format=3 uid="uid://do8r77ok0kq76"]
+[gd_scene format=3 uid="uid://c3h1s5g78ebnc"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_23krd"]
+[ext_resource type="PackedScene" uid="uid://c6q7420gsveuy" path="res://props/props.tscn" id="1_gss50"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bhunq"]
 
-[node name="Box" type="RigidBody3D" unique_id=1230879981]
-physics_material_override = SubResource("PhysicsMaterial_23krd")
+[node name="Box" unique_id=33107915 instance=ExtResource("1_gss50")]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=290812120]
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="0" unique_id=472884994]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1057610615]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=1242224829]
 shape = SubResource("BoxShape3D_bhunq")

@@ -1,42 +1,51 @@
-[gd_scene format=3 uid="uid://d1ha3t1e7y8co"]
+[gd_scene format=3 uid="uid://dtl5v6hj5rso1"]
 
 [ext_resource type="Script" uid="uid://b2f6ygkhxgnpj" path="res://creatures/crab/crab.gd" id="1_6h2op"]
+[ext_resource type="PackedScene" uid="uid://c1kkstjp75b3d" path="res://creatures/creature.tscn" id="1_qxx8p"]
 [ext_resource type="Material" uid="uid://ja7so85upi0r" path="res://creatures/crab/crab.tres" id="2_gkef2"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_bhunq"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_5c72g"]
 
-[sub_resource type="PrismMesh" id="PrismMesh_bhunq"]
+[sub_resource type="PrismMesh" id="PrismMesh_3sc76"]
 size = Vector3(0.8, 0.8, 0.8)
 
-[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_vwow1"]
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_8u3p4"]
 
-[node name="Crab" type="CharacterBody3D" unique_id=1571507680]
+[node name="Crab" unique_id=1773762692 instance=ExtResource("1_qxx8p")]
 script = ExtResource("1_6h2op")
+speed_max = 5.0
+jump_velocity = 6
+rotation_speed = 2.094395
+max_side_acceleration_multiplier = 1.5
+zoom_boundaries = [3.0, 6.0]
+zoom_speed = 10.0
+pitch_boundaries = [-0.872665, 0.872665]
+camera_rotation_speed = [0.003, 0.003]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=501621431]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0" unique_id=181210425]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("SphereShape3D_bhunq")
+shape = SubResource("SphereShape3D_5c72g")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CollisionShape3D" unique_id=1609701737]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CollisionShape3D" index="0" unique_id=816783023]
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="CollisionShape3D/CSGCombiner3D" unique_id=2031170995]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CollisionShape3D/CSGCombiner3D" index="0" unique_id=1947694170]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("PrismMesh_bhunq")
+mesh = SubResource("PrismMesh_3sc76")
 material = ExtResource("2_gkef2")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D/CSGCombiner3D" unique_id=1205809537]
+[node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D/CSGCombiner3D" index="1" unique_id=955356124]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 size = Vector3(0.8, 0.8, 0.2)
 material = ExtResource("2_gkef2")
 
-[node name="RotationPivot" type="Node3D" parent="." unique_id=2098256238]
+[node name="RotationPivot" type="Node3D" parent="." index="1" unique_id=1619244845]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.5, 0)
 
-[node name="SpringArm3D" type="SpringArm3D" parent="RotationPivot" unique_id=654560054]
-shape = SubResource("SeparationRayShape3D_vwow1")
+[node name="SpringArm3D" type="SpringArm3D" parent="RotationPivot" index="0" unique_id=1012092435]
+shape = SubResource("SeparationRayShape3D_8u3p4")
 spring_length = 4.5
 margin = 0.2
 
-[node name="Camera3D" type="Camera3D" parent="RotationPivot/SpringArm3D" unique_id=1254871119]
+[node name="Camera3D" type="Camera3D" parent="RotationPivot/SpringArm3D" index="0" unique_id=1336538283]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 fov = 50.0

@@ -1,5 +1,5 @@
 class_name Crab
-extends CharacterBody3D
+extends Creature
 
 @export var speed_max := 5.0 # m/s
 @export var jump_velocity := 6 # m/s^2
@@ -37,16 +37,17 @@ func camera_rotation(event: InputEvent):
 		)
 
 func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
 	camera_zooming(delta)
-	character_movement(delta)
+	character_movement()
 	check_end()
 
 func camera_zooming(delta: float):
-	var zoom_direction := 0
+	var zoom_direction := 0.0
 	if Input.is_action_just_pressed("zoom_in"):
-		zoom_direction = -1
+		zoom_direction = -1.0
 	elif Input.is_action_just_pressed("zoom_out"):
-		zoom_direction = 1
+		zoom_direction = 1.0
 	spring_arm.spring_length += zoom_direction * zoom_speed * delta
 	spring_arm.spring_length = clampf(
 		spring_arm.spring_length,
@@ -54,17 +55,16 @@ func camera_zooming(delta: float):
 		zoom_boundaries[1]
 	)
 
-func character_movement(delta: float) -> void:
+func character_movement() -> void:
 	if is_on_floor():
 		double_jump = true
-	else:
-		velocity += get_gravity() * delta
 
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_velocity
-	elif Input.is_action_just_pressed("jump") and double_jump:
-		velocity.y = jump_velocity
-		double_jump = false
+	if Input.is_action_just_pressed("jump"):
+		if  is_on_floor():
+			velocity += up_direction * jump_velocity
+		elif double_jump:
+			velocity += up_direction * jump_velocity
+			double_jump = false
 
 	var input_dir := Input.get_vector(
 		"move_left",
@@ -73,31 +73,43 @@ func character_movement(delta: float) -> void:
 		"move_backward"
 	)
 	var pivot_basis := rotation_pivot.transform.basis
-	var direction := (pivot_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	var rotation_direction := (pivot_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction := pivot_basis * Vector3(input_dir.x, 0, input_dir.y)
 
-	if direction:
+	if not is_zero_approx(direction.length_squared()):
+		direction -= up_direction * direction.dot(up_direction)
+		direction = direction.normalized()
+
+	if not is_zero_approx(direction.length_squared()):
 		var side_acceleration_multiplier := 1.0
-		var look_target: Vector3
+		var look_target := direction
 		if Input.is_action_pressed("side_acceleration"):
-			var camera_forward := -pivot_basis.z.normalized()
-			look_target = camera_forward
+			var camera_forward := -pivot_basis.z
+			camera_forward -= up_direction * camera_forward.dot(up_direction)
+			if not is_zero_approx(camera_forward.length_squared()):
+				look_target = camera_forward.normalized()
 
 			var camera_right := pivot_basis.x.normalized()
 			var dot_sideways := absf(direction.dot(camera_right))
-			side_acceleration_multiplier = lerpf(1.0, max_side_acceleration_multiplier, dot_sideways)
-		else:
-			look_target = rotation_direction
+			side_acceleration_multiplier = lerpf(
+				1.0, 
+				max_side_acceleration_multiplier, 
+				dot_sideways
+			)
+		character_body.look_at(
+			character_body.global_position + look_target,
+			up_direction
+		)
+		var normal_velocity := velocity.dot(up_direction)
+		var tangent_velocity := (
+			direction *
+			speed_max *
+			side_acceleration_multiplier
+		)
+		velocity = tangent_velocity + up_direction * normal_velocity
 
-		var horizontal_look_target := look_target
-		horizontal_look_target.y = 0.0
-		horizontal_look_target = horizontal_look_target.normalized()
-		character_body.look_at(character_body.global_position + horizontal_look_target, up_direction)
-		velocity.x = direction.x * speed_max * side_acceleration_multiplier
-		velocity.z = direction.z * speed_max * side_acceleration_multiplier
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, speed_max)
-		velocity.z = move_toward(velocity.z, 0.0, speed_max)
+		var normal_velocity := velocity.dot(up_direction)
+		velocity = up_direction * normal_velocity
 
 	move_and_slide()
 

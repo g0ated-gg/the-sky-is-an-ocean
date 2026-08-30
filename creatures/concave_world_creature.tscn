@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://opjxhse58t73"]
-
-[ext_resource type="Script" uid="uid://cgcosr1u20fmq" path="res://creatures/concave_world_creature.gd" id="1_lgfx1"]
-
-[node name="ConcaveWorldCreature" type="CharacterBody3D" unique_id=1697599058]
-script = ExtResource("1_lgfx1")

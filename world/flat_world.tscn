@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://ot8al60lyrgh"]
 
 [ext_resource type="PackedScene" uid="uid://bor8oooo8ewrj" path="res://props/floor.tscn" id="1_2b3wy"]
-[ext_resource type="PackedScene" uid="uid://do8r77ok0kq76" path="res://props/box.tscn" id="2_shbc3"]
-[ext_resource type="PackedScene" uid="uid://bc4cnenbc8ymm" path="res://props/ball.tscn" id="3_sfskh"]
-[ext_resource type="PackedScene" uid="uid://d1ha3t1e7y8co" path="res://creatures/crab/crab.tscn" id="4_bym7v"]
+[ext_resource type="PackedScene" uid="uid://dtl5v6hj5rso1" path="res://creatures/crab/crab.tscn" id="2_xf7dc"]
+[ext_resource type="PackedScene" uid="uid://c7ybv430n3ww1" path="res://props/ball.tscn" id="3_4kjyp"]
+[ext_resource type="PackedScene" uid="uid://c3h1s5g78ebnc" path="res://props/box.tscn" id="4_2b3wy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sm1cj"]
 
@@ -24,10 +24,13 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 
 [node name="Floor" parent="." unique_id=1963107471 instance=ExtResource("1_2b3wy")]
 
-[node name="Box" parent="." unique_id=1230879981 instance=ExtResource("2_shbc3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -3)
+[node name="Crab" parent="." unique_id=1773762692 instance=ExtResource("2_xf7dc")]
+gravity_type = 2
 
-[node name="Ball" parent="." unique_id=948986956 instance=ExtResource("3_sfskh")]
+[node name="Ball" parent="." unique_id=33107915 instance=ExtResource("3_4kjyp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, -3)
+gravity_type = 2
 
-[node name="Crab" parent="." unique_id=1571507680 instance=ExtResource("4_bym7v")]
+[node name="Box" parent="." unique_id=328258143 instance=ExtResource("4_2b3wy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -3)
+gravity_type = 2

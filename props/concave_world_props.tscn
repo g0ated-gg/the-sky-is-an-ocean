@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://bk46tgfknsrqs"]
-
-[ext_resource type="Script" uid="uid://ckym5gdmcu6nn" path="res://props/concave_world_props.gd" id="1_6rs5l"]
-
-[node name="ConcaveWorldProps" type="RigidBody3D" unique_id=110501008]
-gravity_scale = 0.0
-script = ExtResource("1_6rs5l")

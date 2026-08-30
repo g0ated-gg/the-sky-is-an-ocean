@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c6q7420gsveuy"]
+
+[ext_resource type="Script" uid="uid://chpeexe6iyxvp" path="res://props/props.gd" id="1_k5qpa"]
+
+[node name="Props" type="RigidBody3D" unique_id=33107915]
+gravity_scale = 0.0
+script = ExtResource("1_k5qpa")

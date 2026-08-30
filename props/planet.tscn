@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://borylojaqe8q8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bhunq"]
+radius = 3.0
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=1200447168]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1324306973]
+radius = 3.0
+radial_segments = 24
+rings = 12
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1717156888]
+shape = SubResource("SphereShape3D_bhunq")
