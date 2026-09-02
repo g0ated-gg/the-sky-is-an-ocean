@@ -41,6 +41,7 @@ func _physics_process(delta: float) -> void:
 	camera_zooming(delta)
 	var movement_velocity := character_movement()
 	push_props(movement_velocity)
+	check_restart()
 	check_end()
 
 func camera_zooming(delta: float):
@@ -115,6 +116,10 @@ func character_movement() -> Vector3:
 	var movement_velocity := velocity
 	move_and_slide()
 	return movement_velocity
+
+func check_restart() -> void:
+	if Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
 
 func check_end() -> void:
 	if Input.is_action_just_pressed("pause"):
