@@ -39,7 +39,8 @@ func camera_rotation(event: InputEvent):
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	camera_zooming(delta)
-	character_movement()
+	var movement_velocity := character_movement()
+	push_props(movement_velocity)
 	check_end()
 
 func camera_zooming(delta: float):
@@ -55,7 +56,7 @@ func camera_zooming(delta: float):
 		zoom_boundaries[1]
 	)
 
-func character_movement() -> void:
+func character_movement() -> Vector3:
 	if is_on_floor():
 		double_jump = true
 
@@ -111,7 +112,9 @@ func character_movement() -> void:
 		var normal_velocity := velocity.dot(up_direction)
 		velocity = up_direction * normal_velocity
 
+	var movement_velocity := velocity
 	move_and_slide()
+	return movement_velocity
 
 func check_end() -> void:
 	if Input.is_action_just_pressed("pause"):
