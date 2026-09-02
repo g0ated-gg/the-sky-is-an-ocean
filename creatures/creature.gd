@@ -36,10 +36,10 @@ func push_props(push_velocity: Vector3) -> void:
 		return
 	for i in get_slide_collision_count():
 		var collision := get_slide_collision(i)
-		var props := collision.get_collider()
-		if not props is Props:
+		var collider := collision.get_collider()
+		if not collider is Props:
 			continue
-		var props_rigidbody := props as Props
+		var props := collider as Props
 		var push_direction := -collision.get_normal()
 		push_direction -= up_direction * push_direction.dot(up_direction)
 		if push_direction.is_zero_approx():
@@ -48,16 +48,16 @@ func push_props(push_velocity: Vector3) -> void:
 		var push_speed := tangent_velocity.dot(push_direction)
 		if push_speed <= 0.0:
 			continue
-		var mass_ratio := mass / props_rigidbody.mass
+		var mass_ratio := mass / props.mass
 		var force_multiplier := mass_ratio / (mass_ratio + 1.0)
 		var target_speed := push_speed * force_multiplier
-		var current_speed := props_rigidbody.linear_velocity.dot(push_direction)
+		var current_speed := props.linear_velocity.dot(push_direction)
 		var speed_difference := target_speed - current_speed
 		if speed_difference <= 0.0:
 			continue
 		var impulse := (
 			push_direction
-			* props_rigidbody.mass
+			* props.mass
 			* speed_difference
 		)
-		props_rigidbody.apply_central_impulse(impulse)
+		props.apply_central_impulse(impulse)
