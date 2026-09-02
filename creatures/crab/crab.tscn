@@ -9,7 +9,47 @@
 [sub_resource type="PrismMesh" id="PrismMesh_3sc76"]
 size = Vector3(0.8, 0.8, 0.8)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_68wk0"]
+size = Vector3(1.5, 1, 1.5)
+
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_8u3p4"]
+
+[sub_resource type="Animation" id="Animation_5c72g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D/CSGCombiner3D/KickArea:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_3sc76"]
+resource_name = "kick"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D/CSGCombiner3D/KickArea:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8u3p4"]
+_data = {
+&"RESET": SubResource("Animation_5c72g"),
+&"kick": SubResource("Animation_3sc76")
+}
 
 [node name="Crab" unique_id=1773762692 instance=ExtResource("1_qxx8p")]
 script = ExtResource("1_6h2op")
@@ -38,6 +78,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 size = Vector3(0.8, 0.8, 0.2)
 material = ExtResource("2_gkef2")
 
+[node name="KickArea" type="Area3D" parent="CollisionShape3D/CSGCombiner3D" index="2" unique_id=2102119605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+monitoring = false
+monitorable = false
+gravity_space_override = 3
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+gravity = 200.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionShape3D/CSGCombiner3D/KickArea" index="0" unique_id=1506383080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
+shape = SubResource("BoxShape3D_68wk0")
+
 [node name="RotationPivot" type="Node3D" parent="." index="1" unique_id=1619244845]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.5, 0)
 
@@ -49,3 +102,6 @@ margin = 0.2
 [node name="Camera3D" type="Camera3D" parent="RotationPivot/SpringArm3D" index="0" unique_id=1336538283]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 fov = 50.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=1739222159]
+libraries/ = SubResource("AnimationLibrary_8u3p4")

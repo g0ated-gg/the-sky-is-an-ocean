@@ -16,6 +16,8 @@ extends Creature
 @onready var rotation_pivot: Node3D = $RotationPivot
 @onready var spring_arm: SpringArm3D = $RotationPivot/SpringArm3D
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 var double_jump := true
 
@@ -41,8 +43,9 @@ func _physics_process(delta: float) -> void:
 	camera_zooming(delta)
 	var movement_velocity := character_movement()
 	push_props(movement_velocity)
-	check_restart()
-	check_end()
+	handle_kick()
+	handle_restart()
+	handle_end()
 
 func camera_zooming(delta: float):
 	var zoom_direction := 0.0
@@ -117,10 +120,14 @@ func character_movement() -> Vector3:
 	move_and_slide()
 	return movement_velocity
 
-func check_restart() -> void:
+func handle_kick() -> void:
+	if Input.is_action_just_pressed("kick"):
+		animation_player.play("kick")
+
+func handle_restart() -> void:
 	if Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene()
 
-func check_end() -> void:
+func handle_end() -> void:
 	if Input.is_action_just_pressed("pause"):
 		get_tree().quit()

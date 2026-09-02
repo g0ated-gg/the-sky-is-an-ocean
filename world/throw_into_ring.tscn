@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cpirbwd0jdlij"]
+
+[ext_resource type="PackedScene" uid="uid://bor8oooo8ewrj" path="res://decorations/floor.tscn" id="1_umgk0"]
+[ext_resource type="PackedScene" uid="uid://dtl5v6hj5rso1" path="res://creatures/crab/crab.tscn" id="2_6jq5x"]
+[ext_resource type="PackedScene" uid="uid://c7ybv430n3ww1" path="res://props/ball.tscn" id="3_bvxg3"]
+[ext_resource type="PackedScene" uid="uid://p1ipkx3u872o" path="res://decorations/ring.tscn" id="4_oxby8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sm1cj"]
+
+[sub_resource type="Sky" id="Sky_2ruuo"]
+sky_material = SubResource("ProceduralSkyMaterial_sm1cj")
+
+[sub_resource type="Environment" id="Environment_v0x4l"]
+background_mode = 2
+sky = SubResource("Sky_2ruuo")
+ambient_light_source = 3
+reflected_light_source = 2
+
+[node name="ThrowIntoRing" type="WorldEnvironment" unique_id=1639359886]
+environment = SubResource("Environment_v0x4l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1441685893]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="Floor" parent="." unique_id=1963107471 instance=ExtResource("1_umgk0")]
+
+[node name="Crab" parent="." unique_id=1773762692 instance=ExtResource("2_6jq5x")]
+gravity_type = 2
+
+[node name="Ball" parent="." unique_id=33107915 instance=ExtResource("3_bvxg3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -3)
+gravity_type = 2
+
+[node name="Ring" parent="." unique_id=1443430135 instance=ExtResource("4_oxby8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -8)

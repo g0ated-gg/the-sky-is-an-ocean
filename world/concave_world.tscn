@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cfmyafvbx8qyq"]
 
-[ext_resource type="PackedScene" uid="uid://dyawytdfm51jr" path="res://props/test_world_sphere.tscn" id="1_132oq"]
+[ext_resource type="PackedScene" uid="uid://dyawytdfm51jr" path="res://decorations/test_world_sphere.tscn" id="1_132oq"]
 [ext_resource type="PackedScene" uid="uid://dtl5v6hj5rso1" path="res://creatures/crab/crab.tscn" id="2_61ioe"]
 [ext_resource type="PackedScene" uid="uid://c3h1s5g78ebnc" path="res://props/box.tscn" id="3_ywqqg"]
 [ext_resource type="PackedScene" uid="uid://c7ybv430n3ww1" path="res://props/ball.tscn" id="4_ywqqg"]

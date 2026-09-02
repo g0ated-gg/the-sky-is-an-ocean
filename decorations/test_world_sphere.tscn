@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dyawytdfm51jr"]
 
-[ext_resource type="PackedScene" uid="uid://3v2xwd7ii132" path="res://props/TestWorldSphere.blend" id="1_pss74"]
+[ext_resource type="PackedScene" uid="uid://3v2xwd7ii132" path="res://decorations/TestWorldSphere.blend" id="1_pss74"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhunq"]
 transparency = 4
@@ -11,7 +11,7 @@ data = PackedVector3Array(0, 7.0257998, -6.9807997, 0.6139, 7.6805997, -6.2327, 
 
 [node name="TestWorldSphere" unique_id=924795254 instance=ExtResource("1_pss74")]
 
-[node name="Sphere" parent="." index="0" unique_id=1640427255]
+[node name="Sphere" parent="." index="0" unique_id=1725096889]
 surface_material_override/0 = SubResource("StandardMaterial3D_bhunq")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=642270900]

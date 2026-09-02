@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://3v2xwd7ii132"
-path="res://.godot/imported/TestWorldSphere.blend-a0718241525890b621781e42a396e3a9.scn"
+uid="uid://dsbjfwynfi4m3"
+path="res://.godot/imported/RingModel.blend-1d1511df6243dbf4190ba8956d09902e.scn"
 
 [deps]
 
-source_file="res://props/TestWorldSphere.blend"
-dest_files=["res://.godot/imported/TestWorldSphere.blend-a0718241525890b621781e42a396e3a9.scn"]
+source_file="res://decorations/RingModel.blend"
+dest_files=["res://.godot/imported/RingModel.blend-1d1511df6243dbf4190ba8956d09902e.scn"]
 
 [params]
 
