@@ -11,12 +11,22 @@ extends Creature
 @export var pitch_boundaries := [-0.872665, 0.872665] # rad
 @export var camera_rotation_speed := [0.003, 0.003]
 
+@export var kick_impulse := 9.0 # kg*m/s
+@export var kick_side_factor := tan(deg_to_rad(15))
+@export var kick_forward_factor := tan(deg_to_rad(8.5))
+
 
 @onready var character_body: CSGCombiner3D = $CollisionShape3D/CSGCombiner3D
 @onready var rotation_pivot: Node3D = $RotationPivot
 @onready var spring_arm: SpringArm3D = $RotationPivot/SpringArm3D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+@onready var kick_area: Area3D = $CollisionShape3D/CSGCombiner3D/KickArea
+@onready var kick_shape: CollisionShape3D = $CollisionShape3D/CSGCombiner3D/KickArea/CollisionShape3D
+@onready var box_shape := kick_shape.shape as BoxShape3D
+@onready var kick_area_half_width := box_shape.size.x * 0.5
+@onready var kick_area_half_depth := box_shape.size.z * 0.5
 
 
 var double_jump := true
@@ -123,6 +133,43 @@ func character_movement() -> Vector3:
 func handle_kick() -> void:
 	if Input.is_action_just_pressed("kick"):
 		animation_player.play("kick")
+
+func kick_props() -> void:
+	for body in kick_area.get_overlapping_bodies():
+		if not body is Props:
+			continue
+		apply_kick(body as Props)
+
+func apply_kick(props: Props) -> void:
+	var local_position := kick_area.to_local(
+		props.global_position
+	)
+	var side := clampf(
+		local_position.x / kick_area_half_width,
+		-1.0,
+		1.0
+	)
+	var forward := clampf(
+		-local_position.z / kick_area_half_depth,
+		-1.0,
+		1.0
+	)
+
+	side = signf(side) * pow(absf(side), 1.5)
+	forward = signf(forward) * pow(absf(forward), 1.5)
+
+	var side_direction := kick_area.global_transform.basis.x
+	var forward_direction := -kick_area.global_transform.basis.z
+
+	var throw_direction := (
+		up_direction
+		- side_direction * side * kick_side_factor
+		+ forward_direction * forward * kick_forward_factor
+	).normalized()
+
+	props.apply_central_impulse(
+		throw_direction * kick_impulse
+	)
 
 func handle_restart() -> void:
 	if Input.is_action_just_pressed("restart"):

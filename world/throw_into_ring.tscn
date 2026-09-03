@@ -25,6 +25,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 [node name="Floor" parent="." unique_id=1963107471 instance=ExtResource("1_umgk0")]
 
 [node name="Crab" parent="." unique_id=1773762692 instance=ExtResource("2_6jq5x")]
+kick_impulse = 9.0
 gravity_type = 2
 
 [node name="Ball" parent="." unique_id=33107915 instance=ExtResource("3_bvxg3")]
